@@ -6,6 +6,14 @@ studentRouter.get("/", async (_req, res) => {
   res.json(students);
 });
 
+studentRouter.get("/fines/:id", async (req, res) => {
+  const student = await Student.findById(req.params.id);
+  // check fines per hour of late
+
+  // check number of absences:
+  // get unique days, check number of unique days student attended, subtract and multiply by amount (check if officer)
+});
+
 studentRouter.post("/", async (req, res) => {
   const body = req.body;
   const newStudent = new Student({

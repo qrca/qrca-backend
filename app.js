@@ -4,7 +4,6 @@ const cors = require("cors");
 
 const eventRouter = require("./router/events");
 const studentRouter = require("./router/students");
-const logRouter = require("./router/logs");
 // ^^^^^ routers ^^^^^^^
 
 const config = require("./utils/config");
@@ -26,13 +25,8 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
-app.use("/api/logs", logRouter);
 app.use("/api/students", studentRouter);
 app.use("/api/events", eventRouter);
-// if (process.env.NODE_ENV === "development") {
-//   const testRouter = require("./controllers/tests")
-//   app.use("/api/testing", testRouter)
-// }
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
