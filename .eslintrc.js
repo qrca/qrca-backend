@@ -13,6 +13,6 @@ module.exports = {
     indent: ["error", 2],
     "linebreak-style": ["error", "windows"],
     quotes: ["error", "double"],
-    semi: ["error", "always"],
+    semi: ["error", "none"],
   },
 };

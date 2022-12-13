@@ -1,20 +1,22 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const blogRouter = require("./controllers/blogs");
-// const userRouter = require("./controllers/users");
-const mongoose = require("mongoose");
+
+const eventRouter = require("./router/events");
+const studentRouter = require("./router/students");
+const logRouter = require("./router/logs");
+// ^^^^^ routers ^^^^^^^
+
 const config = require("./utils/config");
 const logger = require("./utils/logger");
 const middleware = require("./utils/middleware");
-// const loginRouter = require("./controllers/login");
+// ^^^^^ utils ^^^^^
 
+const mongoose = require("mongoose");
 mongoose
   .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
   })
   .then(() => logger.info("Connected to mongoDB"))
   .catch((err) => logger.error(err.message));
@@ -24,13 +26,13 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
-// app.use("/api/blogs", middleware.userExtractor, blogRouter);
-// app.use("/api/users", userRouter);
-// app.use("/api/login", loginRouter);
-if (process.env.NODE_ENV === "development") {
-  const testRouter = require("./controllers/tests");
-  app.use("/api/testing", testRouter);
-}
+app.use("/api/logs", logRouter);
+app.use("/api/students", studentRouter);
+app.use("/api/events", eventRouter);
+// if (process.env.NODE_ENV === "development") {
+//   const testRouter = require("./controllers/tests")
+//   app.use("/api/testing", testRouter)
+// }
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

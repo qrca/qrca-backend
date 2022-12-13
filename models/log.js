@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 
 const logSchema = new mongoose.Schema({
-  idNumber: String,
-  name: String,
-  address: String,
+  event: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Event",
+  },
+  student: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
+  },
+  fines: Number,
 });
 
 logSchema.set("toJSON", {
@@ -13,4 +19,4 @@ logSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Student", logSchema);
+module.exports = mongoose.model("Log", logSchema);
