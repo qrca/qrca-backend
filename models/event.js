@@ -4,15 +4,24 @@ const eventSchema = new mongoose.Schema({
   eventName: String,
   eventType: String,
   date: Date,
-  startTime: Date,
-  endTime: Date,
+  in1: { type: Date, default: null },
+  inEnd1: { type: Date, default: null },
+  in2: { type: Date, default: null },
+  inEnd2: { type: Date, default: null },
+  out1: { type: Date, default: null },
+  outEnd1: { type: Date, default: null },
+  out2: { type: Date, default: null },
+  outEnd2: { type: Date, default: null },
   studentLogs: [
     {
       student: {
         type: mongoose.Schema.Types.String,
         ref: "Student",
       },
-      logTime: Date,
+      login1: { type: Date, default: null },
+      login2: { type: Date, default: null },
+      logout1: { type: Date, default: null },
+      logout2: { type: Date, default: null },
     },
   ],
 });

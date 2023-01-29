@@ -15,11 +15,6 @@ studentRouter.get("/fines/:id", async (req, res) => {
   })
     .lean()
     .populate("studentLogs.student");
-  console.log(studentAttendance);
-  const filteredAttendance = studentAttendance.map(
-    (event) => event.studentLogs
-  );
-  // console.log(filteredAttendance);
   res.status(200).json({ hi: "hi" });
 
   // check number of absences:
