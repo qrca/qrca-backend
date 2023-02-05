@@ -22,6 +22,7 @@ const eventSchema = new mongoose.Schema({
       login2: { type: Date, default: null },
       logout1: { type: Date, default: null },
       logout2: { type: Date, default: null },
+      isExcused: { type: Boolean, default: false },
     },
   ],
 });

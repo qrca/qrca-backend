@@ -77,29 +77,71 @@ eventRouter.post("/", async (req, res) => {
 eventRouter.put("/:id", async (req, res) => {
   const eventId = req.params.id;
   const body = req.body;
-  const login1 = body.login1;
-  const studentUpdate = await Event.findOneAndUpdate(
-    { _id: eventId, "studentLogs.student": body.studentId },
-    { $set: { "studentLogs.$.login1": login1 } },
-    { new: true }
+
+  // ####################### test feature #########################
+  const events = await Event.findById(eventId);
+  const student = events.studentLogs.filter(
+    (s) => s.student === body.studentId
   );
+  let studentUpdate;
+
+  // console.log(body.login1 !== null && body.login1 !== undefined);
+  // console.log(body.login2 !== null && body.login2 !== undefined);
+  // console.log(body.logout1 !== null && body.logout1 !== undefined);
+  // console.log(body.logout2 !== null && body.logout2 !== undefined);
+  // const studentUpdate = await Event.findOneAndUpdate(
+  //   { _id: eventId, "studentLogs.student": body.studentId },
+  //   { $set: { "studentLogs.$.login1": login1 } },
+  //   { new: true }
+  // );
 
   //////////////// CHECK IF IN1, IN2, OUT1, OUT2
-
-  // const studentFromDb = await Student.findById(body.studentId);
-
-  // console.log(eventsFromDb);
-  // const newStudentLog = {
-  //   student: studentFromDb._id,
-  //   logTime: moment(body.logTime).tz("Asia/Manila"),
-  // };
-  // eventsFromDb.studentLogs = eventsFromDb.studentLogs.concat(newStudentLog);
-  // const savedLogs = await eventsFromDb.save();
+  if (
+    body.login1 !== null &&
+    body.login1 !== undefined &&
+    student[0].login1 === null
+  ) {
+    studentUpdate = await Event.findOneAndUpdate(
+      { _id: eventId, "studentLogs.student": body.studentId },
+      { $set: { "studentLogs.$.login1": body.login1 } },
+      { new: true }
+    );
+  } else if (
+    body.login2 !== null &&
+    body.login2 !== undefined &&
+    student[0].login2 === null
+  ) {
+    studentUpdate = await Event.findOneAndUpdate(
+      { _id: eventId, "studentLogs.student": body.studentId },
+      { $set: { "studentLogs.$.login2": body.login2 } },
+      { new: true }
+    );
+  } else if (
+    body.logout1 !== null &&
+    body.logout1 !== undefined &&
+    student[0].logout1 === null
+  ) {
+    studentUpdate = await Event.findOneAndUpdate(
+      { _id: eventId, "studentLogs.student": body.studentId },
+      { $set: { "studentLogs.$.logout1": body.logout1 } },
+      { new: true }
+    );
+  } else if (
+    body.logout2 !== null &&
+    body.logout2 !== undefined &&
+    student[0].logout2 === null
+  ) {
+    studentUpdate = await Event.findOneAndUpdate(
+      { _id: eventId, "studentLogs.student": body.studentId },
+      { $set: { "studentLogs.$.logout2": body.logout2 } },
+      { new: true }
+    );
+  }
 
   res.status(200).json(studentUpdate);
 });
 
-eventRouter.delete("/", async (req, res) => {
+eventRouter.delete("/ajdsfjadsiadsfiuasudifh", async (req, res) => {
   await Event.deleteMany({});
   res.status(200).send("All events deleted.");
 });
