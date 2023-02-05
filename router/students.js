@@ -27,6 +27,7 @@ studentRouter.post("/", async (req, res) => {
     _id: body.idNumber,
     name: body.name,
     address: body.address,
+    isOfficer: false,
   });
 
   const savedStudent = await newStudent.save();
