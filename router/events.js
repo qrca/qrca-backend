@@ -53,7 +53,7 @@ eventRouter.post("/", async (req, res) => {
 
   const newEvent = new Event({
     eventName: body.eventName,
-    eventType: body.eventType,
+    hasNoFines: body.hasNoFines,
     date: moment(body.date).tz("Asia/Manila"),
     in1,
     inEnd1,
@@ -68,10 +68,12 @@ eventRouter.post("/", async (req, res) => {
 
   // console.log(newEvent);
 
-  const savedEvent = await newEvent.save();
-  // console.log(studentLogs);
-  // res.status(200).json({ message: `hi` });
-  res.status(200).json(savedEvent);
+  try {
+    const savedEvent = await newEvent.save();
+    res.status(200).json(savedEvent);
+  } catch (error) {
+    res.status(400).json({ message: error._message });
+  }
 });
 
 eventRouter.put("/:id", async (req, res) => {

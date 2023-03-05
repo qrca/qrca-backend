@@ -34,4 +34,16 @@ studentRouter.post("/", async (req, res) => {
   res.status(200).json(savedStudent);
 });
 
+studentRouter.put("/:id", async (req, res) => {
+  const studentId = req.params.id;
+  const officer = await Student.findByIdAndUpdate(
+    studentId,
+    {
+      isOfficer: true,
+    },
+    { new: true }
+  );
+  res.status(200).json(officer);
+});
+
 module.exports = studentRouter;
