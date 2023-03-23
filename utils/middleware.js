@@ -2,10 +2,17 @@ const logger = require("./logger");
 // const jwt = require("jsonwebtoken");
 
 const requestLogger = (request, response, next) => {
-  logger.info("Method:", request.method);
-  logger.info("Path:  ", request.path);
-  logger.info("Body:  ", request.body);
-  logger.info("---");
+  if (process.env.NODE_ENV === "development") {
+    console.log("Method:", request.method);
+    console.log("Path:  ", request.path);
+    console.log("Body:  ", request.body);
+    console.log("---");
+  }
+  logger.info(
+    `server.middleware.requestLogger: {Method: ${request.method}, Path: ${
+      request.path
+    }, Body: ${JSON.stringify(request.body)}}`
+  );
   next();
 };
 

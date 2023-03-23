@@ -10,10 +10,14 @@ eventRouter.get("/", async (_req, res) => {
 });
 
 eventRouter.get("/:id", async (req, res) => {
-  const event = await Event.findById(req.params.id).populate(
-    "studentLogs.student"
-  );
-  res.json(event);
+  try {
+    const event = await Event.findById(req.params.id).populate(
+      "studentLogs.student"
+    );
+    res.json(event);
+  } catch (error) {
+    logger.warn(error);
+  }
 });
 
 eventRouter.post("/", async (req, res) => {
@@ -87,17 +91,6 @@ eventRouter.put("/:id", async (req, res) => {
   );
   let studentUpdate;
 
-  // console.log(body.login1 !== null && body.login1 !== undefined);
-  // console.log(body.login2 !== null && body.login2 !== undefined);
-  // console.log(body.logout1 !== null && body.logout1 !== undefined);
-  // console.log(body.logout2 !== null && body.logout2 !== undefined);
-  // const studentUpdate = await Event.findOneAndUpdate(
-  //   { _id: eventId, "studentLogs.student": body.studentId },
-  //   { $set: { "studentLogs.$.login1": login1 } },
-  //   { new: true }
-  // );
-
-  //////////////// CHECK IF IN1, IN2, OUT1, OUT2
   if (
     body.login1 !== null &&
     body.login1 !== undefined &&
