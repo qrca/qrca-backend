@@ -5,6 +5,7 @@ const cors = require("cors");
 const eventRouter = require("./router/events");
 const studentRouter = require("./router/students");
 const downloadRouter = require("./router/download");
+const loginRouter = require("./router/login");
 // ^^^^^ routers ^^^^^^^
 
 const config = require("./utils/config");
@@ -29,6 +30,7 @@ app.use(middleware.tokenExtractor);
 app.use("/api/students", studentRouter);
 app.use("/api/events", eventRouter);
 app.use("/api/download", downloadRouter);
+app.use("/api/login", loginRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

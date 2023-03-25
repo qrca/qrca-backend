@@ -12,6 +12,7 @@
   "author": "John Isaac Delgado <dev.isaac23@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "exceljs": "^4.3.0",
