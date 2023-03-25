@@ -245,15 +245,41 @@ const calculateFines = (event) => {
   }
 
   students = event.studentLogs.map((s) => {
-    if (event.hasNoFines === true) {
+    const name = s.student.name;
+    const studentNumber = s.student._id;
+    const morningLogin =
+      event.in1 !== null
+        ? s.login1 !== null
+          ? moment(s.login1).format("h:mm:ss a")
+          : "Absent"
+        : "N/A";
+    const morningLogout =
+      event.out1 !== null
+        ? s.logout1 !== null
+          ? moment(s.logout1).format("h:mm:ss a")
+          : "Absent"
+        : "N/A";
+    const afternoonLogin =
+      event.in2 !== null
+        ? s.login2 !== null
+          ? moment(s.login2).format("h:mm:ss a")
+          : "Absent"
+        : "N/A";
+    const afternoonLogout =
+      event.out2 !== null
+        ? s.logout2 !== null
+          ? moment(s.logout2).format("h:mm:ss a")
+          : "Absent"
+        : "N/A";
+    if (event.hasNoFines === true || s.isExcused) {
       return {
-        ...s,
+        name,
+        studentNumber,
+        morningLogin,
+        morningLogout,
+        afternoonLogin,
+        afternoonLogout,
         fine: 0,
-        fine1: 0,
-        fine2: 0,
-        fine3: 0,
-        fine4: 0,
-        wholeDay: 0,
       };
     }
     const fine1 =
@@ -289,33 +315,8 @@ const calculateFines = (event) => {
     ) {
       wholeDay = s.student.isOfficer ? 200 : 100;
     }
+
     const fine = fine1 + fine2 + fine3 + fine4 + wholeDay;
-    const name = s.student.name;
-    const studentNumber = s.student._id;
-    const morningLogin =
-      event.in1 !== null
-        ? s.login1 !== null
-          ? moment(s.login1).format("h:mm:ss a")
-          : "Absent"
-        : "N/A";
-    const morningLogout =
-      event.out1 !== null
-        ? s.logout1 !== null
-          ? moment(s.logout1).format("h:mm:ss a")
-          : "Absent"
-        : "N/A";
-    const afternoonLogin =
-      event.in2 !== null
-        ? s.login2 !== null
-          ? moment(s.login2).format("h:mm:ss a")
-          : "Absent"
-        : "N/A";
-    const afternoonLogout =
-      event.out2 !== null
-        ? s.logout2 !== null
-          ? moment(s.logout2).format("h:mm:ss a")
-          : "Absent"
-        : "N/A";
 
     console.log({ morningLogin, login1: s.login1 });
     return {

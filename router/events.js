@@ -154,6 +154,30 @@ eventRouter.put("/:id", async (req, res) => {
   res.status(200).json(studentUpdate);
 });
 
+eventRouter.put("/excuse/:id", async (req, res) => {
+  const studentId = req.body.studentId;
+  const eventId = req.params.id;
+
+  try {
+    const studentUpdate = await Event.findOneAndUpdate(
+      { _id: eventId, "studentLogs.student": studentId },
+      {
+        $set: {
+          "studentLogs.$.isExcused": true,
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).json(studentUpdate);
+  } catch (error) {
+    logger.error(error);
+    res
+      .status(401)
+      .json({ error: `Student with ID ${studentId} does not exist.` });
+  }
+});
+
 eventRouter.delete("/ajdsfjadsiadsfiuasudifh", async (req, res) => {
   await Event.deleteMany({});
   res.status(200).send("All events deleted.");
