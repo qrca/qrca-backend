@@ -2,3 +2,5 @@
 node_modules
 mongo.js
 logs
+*.csv
+*.xlsx

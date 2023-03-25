@@ -70,8 +70,6 @@ eventRouter.post("/", async (req, res) => {
     studentLogs,
   });
 
-  // console.log(newEvent);
-
   try {
     const savedEvent = await newEvent.save();
     res.status(200).json(savedEvent);
