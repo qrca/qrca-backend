@@ -96,7 +96,12 @@ eventRouter.put("/:id", async (req, res) => {
   ) {
     studentUpdate = await Event.findOneAndUpdate(
       { _id: eventId, "studentLogs.student": body.studentId },
-      { $set: { "studentLogs.$.login1": body.login1 } },
+      {
+        $set: {
+          "studentLogs.$.login1": body.login1,
+          "studentLogs.$.scanIn1": body.scanIn1,
+        },
+      },
       { new: true }
     );
   } else if (
@@ -106,7 +111,12 @@ eventRouter.put("/:id", async (req, res) => {
   ) {
     studentUpdate = await Event.findOneAndUpdate(
       { _id: eventId, "studentLogs.student": body.studentId },
-      { $set: { "studentLogs.$.login2": body.login2 } },
+      {
+        $set: {
+          "studentLogs.$.login2": body.login2,
+          "studentLogs.$.scanIn2": body.scanIn2,
+        },
+      },
       { new: true }
     );
   } else if (
@@ -116,7 +126,12 @@ eventRouter.put("/:id", async (req, res) => {
   ) {
     studentUpdate = await Event.findOneAndUpdate(
       { _id: eventId, "studentLogs.student": body.studentId },
-      { $set: { "studentLogs.$.logout1": body.logout1 } },
+      {
+        $set: {
+          "studentLogs.$.logout1": body.logout1,
+          "studentLogs.$.scanOut1": body.scanOut1,
+        },
+      },
       { new: true }
     );
   } else if (
@@ -126,7 +141,12 @@ eventRouter.put("/:id", async (req, res) => {
   ) {
     studentUpdate = await Event.findOneAndUpdate(
       { _id: eventId, "studentLogs.student": body.studentId },
-      { $set: { "studentLogs.$.logout2": body.logout2 } },
+      {
+        $set: {
+          "studentLogs.$.logout2": body.logout2,
+          "studentLogs.$.scanOut2": body.scanOut2,
+        },
+      },
       { new: true }
     );
   }

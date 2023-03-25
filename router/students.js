@@ -7,6 +7,11 @@ studentRouter.get("/", async (_req, res) => {
   res.json(students);
 });
 
+studentRouter.get("/officers", async (req, res) => {
+  const officers = await Student.find({ isOfficer: true });
+  res.json(officers);
+});
+
 studentRouter.get("/fines/:id", async (req, res) => {
   const student = await Student.findById(req.params.id);
   // check fines per hour of late
