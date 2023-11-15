@@ -22,6 +22,11 @@ eventRouter.get("/:id", async (req, res) => {
 
 eventRouter.post("/", async (req, res) => {
   const body = req.body;
+
+  /**
+   * Note: `Used for creating a new event`
+   * @router
+   */
   const students = await Student.find({});
   const studentLogs = students.map((s) => {
     return {
@@ -33,19 +38,6 @@ eventRouter.post("/", async (req, res) => {
     };
   });
 
-  // const in1 = body.in1 !== null ? moment(body.in1).tz("Asia/Manila") : null;
-  // const inEnd1 =
-  //   body.inEnd1 !== null ? moment(body.inEnd1).tz("Asia/Manila") : null;
-  // const in2 = body.in2 !== null ? moment(body.in2).tz("Asia/Manila") : null;
-  // const inEnd2 =
-  //   body.inEnd2 !== null ? moment(body.inEnd2).tz("Asia/Manila") : null;
-  // const out1 = body.out1 !== null ? moment(body.out1).tz("Asia/Manila") : null;
-  // const outEnd1 =
-  //   body.outEnd1 !== null ? moment(body.outEnd1).tz("Asia/Manila") : null;
-  // const out2 = body.out2 !== null ? moment(body.out2).tz("Asia/Manila") : null;
-  // const outEnd2 =
-  //   body.outEnd2 !== null ? moment(body.outEnd2).tz("Asia/Manila") : null;
-
   const in1 = body.in1;
   const inEnd1 = body.inEnd1;
   const in2 = body.in2;
@@ -55,6 +47,10 @@ eventRouter.post("/", async (req, res) => {
   const outEnd2 = body.outEnd2;
   const outEnd1 = body.outEnd1;
 
+  /**
+   * Note: `Create a new instance of "Event" model`
+   * Saves new event to database
+   */
   const newEvent = new Event({
     eventName: body.eventName,
     hasNoFines: body.hasNoFines,
@@ -82,12 +78,21 @@ eventRouter.put("/:id", async (req, res) => {
   const eventId = req.params.id;
   const body = req.body;
 
-  // ####################### test feature #########################
+  /**
+   * Note: `Used for logging in a new student`
+   * @router
+   */
+
   const events = await Event.findById(eventId);
   const student = events.studentLogs.filter(
     (s) => s.student === body.studentId
   );
   let studentUpdate;
+
+  /**
+   * If statements
+   * Updates the attribute where the student logged in.
+   */
 
   if (
     body.login1 !== null &&
@@ -158,6 +163,11 @@ eventRouter.put("/excuse/:id", async (req, res) => {
   const studentId = req.body.studentId;
   const eventId = req.params.id;
 
+  /**
+   * Note: `Used for excusing a student from fines`
+   * @router
+   */
+
   try {
     const studentUpdate = await Event.findOneAndUpdate(
       { _id: eventId, "studentLogs.student": studentId },
@@ -179,6 +189,10 @@ eventRouter.put("/excuse/:id", async (req, res) => {
 });
 
 eventRouter.delete("/ajdsfjadsiadsfiuasudifh", async (req, res) => {
+  /**
+   * Deletes all events saved in the database
+   * NOTE: MAKE SURE TO SAVE A BACKUP OF THE DATABASE BEFORE PERFORMING AN HTTP REQUEST TO THIS ROUTER
+   */
   await Event.deleteMany({});
   res.status(200).send("All events deleted.");
 });

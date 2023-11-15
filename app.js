@@ -4,7 +4,6 @@ const cors = require("cors");
 
 const eventRouter = require("./router/events");
 const studentRouter = require("./router/students");
-const downloadRouter = require("./router/download");
 const loginRouter = require("./router/login");
 // ^^^^^ routers ^^^^^^^
 
@@ -27,9 +26,13 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
+/**
+ * To access the API, try performing the defined HTTP requests on the URIs. For example, invoke `curl http://localhost:{PORT}/api/students` to get the list of students`
+ * @routerSetup
+ */
+
 app.use("/api/students", studentRouter);
 app.use("/api/events", eventRouter);
-app.use("/api/download", downloadRouter);
 app.use("/api/login", loginRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

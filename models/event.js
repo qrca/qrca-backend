@@ -1,3 +1,15 @@
+/**
+ * Student Schema
+ * @param eventName: name of the event
+ * @param hasNoFines: indicates whether fines are implemented on an event, boolean
+ * @param date: Date of the event
+ * @params in_$num: Starting time of the $numth login
+ * @params inEnd_$num: End time of the $numth login
+ *    @reason in1 and inEnd1 creates a range of the time for the event (7:00-9:00, where 7:00 is in1 and inEnd1 is 9:00)
+ * @param studentLogs: An array containing the students that have logged.
+ * @schema
+ */
+
 const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({

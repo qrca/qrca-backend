@@ -4,6 +4,9 @@ const config = require("./utils/config");
 const logger = require("./utils/logger");
 const NODE_ENV = process.env.NODE_ENV;
 
+/**
+ * @serverSetup
+ */
 try {
   const PORT = config.PORT || 3003;
   const server = http.createServer(app);

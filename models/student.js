@@ -1,3 +1,12 @@
+/**
+ * Student Schema
+ * @param _id: unique ID set by mongoose
+ * @param name: name of the student
+ * @param address
+ * @param isOfficer: a boolean indicating whether a student is an officer or not
+ * @schema
+ */
+
 const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
