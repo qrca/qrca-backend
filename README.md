@@ -14,7 +14,7 @@ Next, update the values of the `username`, `password`, and `database_name` field
 
 Lastly you should be able to start the project by simply running `npm run dev`.
 
-**OPTIONAL** To get linting to work in your IDE of choice (for example VSCode), install the [prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) plugins.
+**OPTIONAL:** To get linting to work in your IDE of choice (for example VSCode), install the [prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) plugins.
 
 ### Backend
 
