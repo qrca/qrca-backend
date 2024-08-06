@@ -11,7 +11,7 @@ loginRouter.post("/", (req, res) => {
   const hash = "$2b$10$hEZYu9s4qH3i4SQ.N6N6p.XUBYOGIJZEZolk2cnECxt.8WBFTgIxG";
   bcrypt.compare(req.body.password, hash).then((result) => {
     console.log(result);
-    if (true) {
+    if (result) {
       res.status(200).json({ result });
     } else {
       res.status(401).json({ result, message: "Invalid Credentials" });
